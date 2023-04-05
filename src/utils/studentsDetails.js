@@ -1,0 +1,34 @@
+export const students=[
+    {
+        id:1,
+        first_name:"Grace",
+        second_name:"Jane",
+        username:"Gracey",
+        regNumber:"BIT2020",
+        attendance:"7"
+       },
+       {
+        id:2,
+        first_name:"Mark",
+        second_name:"Mohan",
+        username:"Marko",
+        regNumber:"BIT3456",
+        attendance:"5"
+       },
+       {
+        id:3,
+        first_name:"George",
+        second_name:"Kinithia",
+        username:"Ajo",
+        regNumber:"BIT2427",
+        attendance:"8"
+       },
+       {
+        id:4,
+        first_name:"Joy",
+        second_name:"Kiki",
+        username:"Kinya",
+        regNumber:"BIT2150",
+        attendance:"5"
+       }
+]
