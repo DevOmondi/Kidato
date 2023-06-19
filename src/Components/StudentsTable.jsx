@@ -19,7 +19,7 @@ const columns = [
   {
     field: "username",
     headerName: "Username",
-    width: 60,
+    width: 160,
     editable: true,
   },
   {
@@ -39,7 +39,7 @@ const columns = [
 export default function StudentsTable() {
   const [studentsList, setStudentsList] = useState([]);
   
-  // TODO: Fetch Transactions on page load
+  // TODO: Fetch students details on page load
   useEffect(()=>{
     generateStudentsList();
   },[])

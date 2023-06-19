@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -14,29 +15,31 @@ import ListIcon from '@mui/icons-material/List';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { studentTabContext } from './StudentDashboard';
+import { useNavigate } from 'react-router-dom';
 
-const categories = [
-  {
-    id: 'Lessons section',
-    children: [
-      {
-        id: 'Lesson Checkin',
-        icon: <HowToRegIcon />,
-        active: true,
-      },
-      { id: 'Assignments', icon: <AssignmentIcon /> },
-      { id: 'Attendance', icon: <ListIcon /> },
-    ],
-  },
-  {
-    id: 'My section',
-    children: [
-      { id: 'Course work', icon: <MenuBookIcon/> },
-      { id: 'Timetable', icon: <WorkHistoryIcon /> },
-      { id: 'Logout', icon: <LogoutIcon /> },
-    ],
-  },
-];
+// const categories = [
+//   {
+//     id: 'Lessons section',
+//     children: [
+//       {
+//         id: 'Lesson Checkin',
+//         icon: <HowToRegIcon />,
+//         active: true,
+//       },
+//       { id: 'Assignments', icon: <AssignmentIcon /> },
+//       { id: 'Attendance', icon: <ListIcon /> },
+//     ],
+//   },
+//   {
+//     id: 'My section',
+//     children: [
+//       { id: 'Course work', icon: <MenuBookIcon/> },
+//       { id: 'Timetable', icon: <WorkHistoryIcon /> },
+//       { id: 'Logout', icon: <LogoutIcon /> },
+//     ],
+//   },
+// ];
 
 const item = {
   py: '2px',
@@ -55,6 +58,15 @@ const itemCategory = {
 
 export default function Navigator(props) {
   const { ...other } = props;
+  const navigate = useNavigate();
+  // use tab context
+  const studentTab = useContext(studentTabContext);
+
+  // TODO: Func to handle student logout
+const handleStudentLogout= (e)=>{
+  e.preventDefault();
+  alert("Are you sure you want to logout?",navigate("/",{replace:true}))
+}
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -68,7 +80,52 @@ export default function Navigator(props) {
           </ListItemIcon>
           <ListItemText>Semester Overview</ListItemText>
         </ListItem>
-        {categories.map(({ id, children }) => (
+        <ListItem
+          sx={{ ...item, ...itemCategory, fontSize: 22, color: "#fff" }}
+          onClick={() => {
+            studentTab.studentTabFunc((studentTab.studentCurrentTab = 0))
+            // console.log(adminTab.adminCurrentTab);
+          }}
+        >
+          <ListItemIcon>
+            <HowToRegIcon />
+          </ListItemIcon>
+          Lesson Checkin
+        </ListItem>
+        <ListItem
+          sx={{ ...item, ...itemCategory, fontSize: 22, color: "#fff" }}
+          onClick={() => {
+            studentTab.studentTabFunc((studentTab.studentCurrentTab = 1))
+            // console.log(adminTab.adminCurrentTab);
+          }}
+        >
+          <ListItemIcon>
+            <AssignmentIcon />
+          </ListItemIcon>
+          Assignments
+        </ListItem>
+        <ListItem
+          sx={{ ...item, ...itemCategory, fontSize: 22, color: "#fff" }}
+          onClick={() => {
+            studentTab.studentTabFunc((studentTab.studentCurrentTab = 2))
+            // console.log(adminTab.adminCurrentTab);
+          }}
+        >
+          <ListItemIcon>
+            <WorkHistoryIcon />
+          </ListItemIcon>
+          Timetable
+        </ListItem>
+        <ListItem
+          sx={{ ...item, ...itemCategory, fontSize: 22, color: "#fff" }}
+          onClick={handleStudentLogout}
+        >
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          Logout
+        </ListItem>
+        {/* {categories.map(({ id, children }) => (
           <Box key={id} sx={{ bgcolor: '#081627' }}>
             <ListItem sx={{ py: 2, px: 3 }}>
               <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
@@ -84,7 +141,7 @@ export default function Navigator(props) {
 
             <Divider sx={{ mt: 2 }} />
           </Box>
-        ))}
+        ))} */}
       </List>
     </Drawer>
   );

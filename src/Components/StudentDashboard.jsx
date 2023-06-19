@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { createContext, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -166,9 +167,13 @@ theme = {
 
 const drawerWidth = 256;
 
+// create admin tab context
+export const studentTabContext = createContext();
+
 export default function StudentDashboard() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
+  const [studentTabIndex, setStudentTabIndex] = useState(0)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -176,6 +181,10 @@ export default function StudentDashboard() {
 
   return (
     <ThemeProvider theme={theme}>
+      <studentTabContext.Provider value={{
+        studentCurrentTab: studentTabIndex,
+        studentTabFunc: setStudentTabIndex,
+      }}>
       <Box sx={{ display: 'flex', minHeight: '100vh' }}>
         <CssBaseline />
         <Box
@@ -206,6 +215,7 @@ export default function StudentDashboard() {
           </Box>
         </Box>
       </Box>
+      </studentTabContext.Provider>
     </ThemeProvider>
   );
 }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
@@ -14,11 +15,16 @@ import Tabs from '@mui/material/Tabs';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
 const lightColor = '#4299e1';
+import { adminTabContext } from './AdminDashboard';
+
 
 function Header(props) {
   const { onDrawerToggle } = props;
+// use tab index
+  const adminTab = useContext(adminTabContext);
+//  console.log(adminTab);
+
 
   return (
     <React.Fragment>
@@ -69,7 +75,7 @@ function Header(props) {
         </Toolbar>
       </AppBar>
       <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
-        <Tabs value={0} textColor="inherit">
+        <Tabs value={adminTab.adminCurrentTab} textColor="inherit">
           <Tab label="Students" />
           <Tab label="Assignments" />
           <Tab label="Modules" />

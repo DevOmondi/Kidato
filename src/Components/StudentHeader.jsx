@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
@@ -14,11 +15,15 @@ import Tabs from '@mui/material/Tabs';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { studentTabContext } from './StudentDashboard';
 
 const lightColor = '#4299e1';
 
 function Header(props) {
   const { onDrawerToggle } = props;
+  // use student tab context
+  const studentTab = useContext(studentTabContext)
+  console.log(studentTab);
 
   return (
     <React.Fragment>
@@ -69,10 +74,10 @@ function Header(props) {
         </Toolbar>
       </AppBar>
       <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
-        <Tabs value={0} textColor="inherit">
-          <Tab label="Lesson Checkin" />
+        <Tabs value={studentTab.studentCurrentTab} textColor="inherit">
+          <Tab label="Lesson Checkin"/>
           <Tab label="Assignments" />
-          <Tab label="My Attendance" />
+          <Tab label="Timetable" />
         </Tabs>
       </AppBar>
     </React.Fragment>
